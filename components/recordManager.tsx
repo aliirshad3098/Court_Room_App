@@ -22,15 +22,23 @@ export default function RecordManager() {
     try {
       const res = await fetch("/api/records");
       const data = await res.json();
-      setRecords(data);
+  
+      // Defensive check
+      if (Array.isArray(data)) {
+        setRecords(data);
+      } else {
+        console.warn("Invalid data format, using empty array:", data);
+        setRecords([]);
+      }
     } catch (err) {
       console.error("Fetch error:", err);
       alert("Failed to load records");
+      setRecords([]); // fallback
     } finally {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     fetchRecords();
   }, []);

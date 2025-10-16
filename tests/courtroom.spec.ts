@@ -1,14 +1,14 @@
 import { test, expect } from "@playwright/test";
 
 test("Start button launches the game and timer appears", async ({ page }) => {
-  await page.goto("http://localhost:3000/courtroom");
+  await page.goto("http://localhost:3000");
   await page.fill('input[type="number"]', "180");
   await page.click("text=Start Game");
   await expect(page.locator("text=Timer:")).toBeVisible();
 });
 
 test("Handle button works only after fixing issue", async ({ page }) => {
-  await page.goto("http://localhost:3000/courtroom");
+  await page.goto("http://localhost:3000");
   await page.fill('input[type="number"]', "180");
   await page.click("text=Start Game");
 
